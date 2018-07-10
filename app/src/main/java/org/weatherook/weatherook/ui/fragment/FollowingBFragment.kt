@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_following_b.*
 import org.weatherook.weatherook.R
-import org.weatherook.weatherook.adapter.CommentAdapter
-import org.weatherook.weatherook.adapter.FollowingAdapter
+import org.weatherook.weatherook.adapter.recyclerview.CommentAdapter
+import org.weatherook.weatherook.adapter.recyclerview.FollowingAdapter
 import org.weatherook.weatherook.item.CommentItem
 import org.weatherook.weatherook.item.FollowingItem
 
@@ -55,7 +55,7 @@ class FollowingBFragment : Fragment(),View.OnClickListener {
 
 
         commentLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        followingAdapter = FollowingAdapter(followingItems, commentLinearLayoutManager,context!!)
+        followingAdapter = FollowingAdapter(followingItems, commentLinearLayoutManager, context!!)
         //      followingAdapter.setOnItemClickListener(this)
         home_following_recycler.layoutManager = LinearLayoutManager(context)
         home_following_recycler.adapter = followingAdapter

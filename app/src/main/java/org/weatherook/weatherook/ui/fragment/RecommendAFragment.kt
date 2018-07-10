@@ -6,12 +6,11 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_recommend_today.*
 import org.weatherook.weatherook.R
-import org.weatherook.weatherook.adapter.RecommendAdapter
+import org.weatherook.weatherook.adapter.recyclerview.RecommendAdapter
 import org.weatherook.weatherook.item.RecommendItem
-import java.util.ArrayList
+import java.util.*
 
 class RecommendAFragment  : Fragment(), View.OnClickListener {
     var item1 = true
@@ -50,7 +49,7 @@ class RecommendAFragment  : Fragment(), View.OnClickListener {
 
         additem1()
 
-        recommendAdapter = RecommendAdapter(recommendItems,context!!)
+        recommendAdapter = RecommendAdapter(recommendItems, context!!)
         //     recommendAdapter.setOnItemClickListener(this)
         home_recommend_recycler.layoutManager = GridLayoutManager(context,2)
         home_recommend_recycler.adapter = recommendAdapter

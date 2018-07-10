@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.weatherook.weatherook.R
-import org.weatherook.weatherook.ui.fragment.SettingsFragment
+import org.weatherook.weatherook.ui.fragment.my.SettingsFragment
 
 
 

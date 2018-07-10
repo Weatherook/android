@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_recommend_tomorrow.*
 import org.weatherook.weatherook.R
-import org.weatherook.weatherook.adapter.RecommendAdapter
+import org.weatherook.weatherook.adapter.recyclerview.RecommendAdapter
 import org.weatherook.weatherook.item.RecommendItem
 import java.util.ArrayList
 
@@ -49,7 +49,7 @@ class RecommendBFragment  : Fragment(), View.OnClickListener {
 
         additem1()
 
-        recommendAdapter = RecommendAdapter(recommendItems,context!!)
+        recommendAdapter = RecommendAdapter(recommendItems, context!!)
         //     recommendAdapter.setOnItemClickListener(this)
         home_recommend_recycler.layoutManager = GridLayoutManager(context,2)
         home_recommend_recycler.adapter = recommendAdapter
