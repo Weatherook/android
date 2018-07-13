@@ -4,7 +4,6 @@ data class FollowingItem (
         var boardIdx : Int,
         var profile : String?,
         var id : String,
-        //var heart : Int,
         var count : Int,
         var photo : String,
         var date : String,

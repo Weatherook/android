@@ -83,7 +83,7 @@ interface NetworkService {
     //오늘의 게시물 필터링
     @FormUrlEncoded
     @POST("/board/today/filter")
-    fun postTodayFilter(@Field("gender") gender : String, @Field("height") height: Int,@Field("size") size : String,@Field("stylelist") stylelist : ArrayList<String>)
+    fun postTodayFilter(@Field("gender") gender : String, @Field("height") height: Int,@Field("size") size : String,@Field("stylelist") stylelist : ArrayList<String>) : Observable<TodayFilterModel>
 
     //메인 최신순
     @GET("/board/today/latest")

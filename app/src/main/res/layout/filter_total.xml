@@ -85,6 +85,9 @@
         <SeekBar
             android:id="@+id/total_size_seekbar"
             android:layout_width="200dp"
+            android:progressTint="@color/weatherookTheme"
+            android:thumbTint="@color/weatherookTheme"
+            android:tickMarkTint="@color/weatherookTheme"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/Widget.AppCompat.SeekBar.Discrete"
@@ -275,7 +278,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:np_selectedTextColor="@color/weatherookTheme"
-            app:np_selectedTextSize="15dp"
+            app:np_selectedTextSize="20dp"
+            app:np_textSize="15dp"
             android:orientation="horizontal"
             app:np_textColor="@color/weatherookTheme">
         </com.shawnlin.numberpicker.NumberPicker>

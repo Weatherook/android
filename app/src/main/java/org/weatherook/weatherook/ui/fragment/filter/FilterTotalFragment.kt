@@ -13,6 +13,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import kotlinx.android.synthetic.main.filter_total.*
 import org.weatherook.weatherook.R
+import org.weatherook.weatherook.singleton.FilterDriver
 
 /**
  * Created by HYEON on 2018-07-06.
@@ -92,12 +93,19 @@ class FilterTotalFragment : Fragment(), View.OnClickListener, SeekBar.OnSeekBarC
     override fun onStart() {
         super.onStart()
 
-        var data =  arrayOf("1","2","3","4","5")
+        var data = ArrayList<String>()
+        for(i in 0..40){
+            data.add(i.toString())
+        }
+        //var data =  arrayOf("1","2","3","4","5")
 //        val array = ArrayList<String>()
-        total_picker.minValue = 1
-        total_picker.maxValue = 5
-        total_picker.displayedValues = data
-        total_picker.value = 3
+        total_picker.minValue = 0
+        total_picker.maxValue = 40
+        var stockArr = arrayOfNulls<String>(data.size)
+        stockArr = data.toArray(stockArr);
+        total_picker.displayedValues = stockArr
+        total_picker.value = 20
+        total_picker.selectedTextSize
 //        total_picker.wrapSelectorWheel=false
         total_picker.setSelectedTextColorResource(R.color.gray)
       //  total_picker.setOnValueChangedListener(this)
