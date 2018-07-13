@@ -214,7 +214,7 @@
         android:layout_gravity="center_horizontal"
         />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/signup_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -226,5 +226,5 @@
         android:textColor="@color/colorAccent"
         android:background="@drawable/rounded_whitebtn"
         android:clickable="true"
-        />
+        />-->
 </LinearLayout>

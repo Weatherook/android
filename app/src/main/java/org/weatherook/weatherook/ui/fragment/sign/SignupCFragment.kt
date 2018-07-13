@@ -40,11 +40,11 @@ class SignupCFragment : Fragment(), View.OnClickListener {
     var style: ArrayList<TextView> = ArrayList()
     override fun onClick(v: View?) {
         when (v) {
-            signup_join -> {
+            /*signup_join -> {
                 //startActivity(Intent(context, SigninActivity::class.java))
                 Log.d("temp", "시작")
                 signup()
-            }
+            }*/
         /*    signup_a -> {
                 if(!boolArr[0])
                     boolArr[0] = true
@@ -124,7 +124,7 @@ class SignupCFragment : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
 
-        signup_join.setOnClickListener(this)
+        //signup_join.setOnClickListener(this)
 
         style.add(signup_a)
         style.add(signup_b)

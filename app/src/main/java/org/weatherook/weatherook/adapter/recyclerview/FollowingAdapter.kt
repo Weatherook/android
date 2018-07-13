@@ -75,7 +75,7 @@ class FollowingAdapter(var followingItems : ArrayList<FollowingItem>, var commen
         holder.followingContent.text = followingItems[position].content
         holder.followingComment.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         holder.followingComment.adapter = CommentAdapter(followingItems[position].comment)
-        holder.followingCommentBtn.text = "댓글 "+followingItems[position].comment.size +"개 모두 보기"
+        holder.followingCommentBtn.text = "댓글 모두 보기"
         holder.followingCommentBtn.setOnClickListener {
             val intent = Intent(context, CommentActivity::class.java)
             intent.putExtra("boardIdx",followingItems[position].boardIdx)

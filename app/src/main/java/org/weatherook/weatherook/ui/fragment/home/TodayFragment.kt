@@ -30,14 +30,6 @@ import java.text.SimpleDateFormat
 
 class TodayFragment : Fragment(), View.OnClickListener {
 
-    var state = true
-
-    var ttime: ArrayList<TextView> = ArrayList()
-    var tweather: ArrayList<ImageView> = ArrayList()
-    var ttemp : ArrayList<TextView> = ArrayList()
-    var mtime = arrayOf(weather_item_time1,weather_item_time2,weather_item_time3,weather_item_time4,weather_item_time5, weather_item_time6)
-    var mweather = arrayOf(weather_item_weather1,weather_item_weather2,weather_item_weather3,weather_item_weather4,weather_item_weather5,weather_item_weather6)
-    var mtemp = arrayOf(weather_item_temp1,weather_item_temp2,weather_item_temp3,weather_item_temp4,weather_item_temp5,weather_item_temp6)
     val networkService by lazy {
         NetworkService.create()
     }
@@ -80,7 +72,15 @@ class TodayFragment : Fragment(), View.OnClickListener {
             }
         }
         val image : ImageView = view.findViewById(R.id.frag_today_weatherimg)
-        image.setOnClickListener {
+        var anim = TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f,
+                TranslateAnimation.RELATIVE_TO_PARENT, -0.05f, TranslateAnimation.RELATIVE_TO_PARENT, 0.05f)
+        anim.duration = 1000
+        anim.repeatCount = -1
+        anim.repeatMode = Animation.REVERSE
+        anim.interpolator = BounceInterpolator()
+        anim.fillAfter = true
+        image.startAnimation(anim)
+        /*image.setOnClickListener {
             var anim = TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f,
                     TranslateAnimation.RELATIVE_TO_PARENT, -0.05f, TranslateAnimation.RELATIVE_TO_PARENT, 0.05f)
             anim.duration = 1000
@@ -89,7 +89,7 @@ class TodayFragment : Fragment(), View.OnClickListener {
             anim.interpolator = BounceInterpolator()
             anim.fillAfter = true
             image.startAnimation(anim)
-        }
+        }*/
 
 
 
@@ -149,7 +149,26 @@ class TodayFragment : Fragment(), View.OnClickListener {
         return view
     }
 
-  /*  fun time() {
+    override fun onPause() {
+        super.onPause()
+        val image : ImageView = view!!.findViewById(R.id.frag_today_weatherimg)
+        image.clearAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val image : ImageView = view!!.findViewById(R.id.frag_today_weatherimg)
+        var anim = TranslateAnimation(TranslateAnimation.ABSOLUTE, 0f, TranslateAnimation.ABSOLUTE, 0f,
+                TranslateAnimation.RELATIVE_TO_PARENT, -0.05f, TranslateAnimation.RELATIVE_TO_PARENT, 0.05f)
+        anim.duration = 1000
+        anim.repeatCount = -1
+        anim.repeatMode = Animation.REVERSE
+        anim.interpolator = BounceInterpolator()
+        anim.fillAfter = true
+        image.startAnimation(anim)
+    }
+
+    /*  fun time() {
         val now = System.currentTimeMillis()
         val date = Date(now)
         val CurDateFormat = SimpleDateFormat("yyyy년 MM월 dd일")

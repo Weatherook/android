@@ -145,7 +145,7 @@
                 android:layout_below="@id/following_content"
                 android:layout_marginTop="5dp"
                 android:lineSpacingExtra="11sp"
-                android:text="댓글 2개 모두 보기"
+                android:text="댓글 개 모두 보기"
                 android:textColor="#7e707070"
                 android:textSize="12sp" />
 

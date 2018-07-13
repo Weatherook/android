@@ -35,6 +35,25 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
         when (v) {
             recommend_refresh_btn -> {
                 clear()
+                val call = networkService.postRecommend(token, x.toFloat(), y.toFloat(), 2)
+                disposable = call.subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                                { success ->
+                                    if (recommendItems.size == 0) {
+                                        Log.i("urls_success1", success.data.size.toString())
+                                        var num: Int = 0
+                                        if (success.data.size > 4) {
+                                            num = 4
+                                        } else {
+                                            num = success.data.size
+                                        }
+
+                                        for (i in 0..num - 1) {
+                                            recommendItems.add(RecommendItem(success.data[i].commendImg,success.data[i].commendRef.toString()))
+                                            recommendAdapter.notifyDataSetChanged()
+                                        }
+                                    }
+                                }, { fail -> Log.i("urls_failed", fail.message) })
 /*
                 if(!item1){
                     additem1()
@@ -67,6 +86,9 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
         }*/
     }
 
+    var x=0.toDouble()
+    var y=0.toDouble()
+
     lateinit var recommendItems: ArrayList<RecommendItem>
     lateinit var recommendAdapter: RecommendAdapter
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -85,6 +107,8 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
 
         WeatherDriver.weatherDriver.subscribe { it ->
             try {
+                x=it.x
+                y=it.y
                 val call = networkService.postRecommend(token, it.x.toFloat(), it.y.toFloat(), 2)
                 disposable = call.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread()).subscribe(
@@ -99,7 +123,7 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
                                         }
 
                                         for (i in 0..num - 1) {
-                                            recommendItems.add(RecommendItem(success.data[i].commendImg))
+                                            recommendItems.add(RecommendItem(success.data[i].commendImg,success.data[i].commendRef.toString()))
                                             recommendAdapter.notifyDataSetChanged()
                                         }
                                     }
@@ -139,7 +163,27 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        recommendAdapter.notifyDataSetChanged()
+        //recommendAdapter.notifyDataSetChanged()
+        clear()
+        val call = networkService.postRecommend(token, x.toFloat(), y.toFloat(), 2)
+        disposable = call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                        { success ->
+                            if (recommendItems.size == 0) {
+                                Log.i("urls_success1", success.data.size.toString())
+                                var num: Int = 0
+                                if (success.data.size > 4) {
+                                    num = 4
+                                } else {
+                                    num = success.data.size
+                                }
+
+                                for (i in 0..num - 1) {
+                                    recommendItems.add(RecommendItem(success.data[i].commendImg,success.data[i].commendRef.toString()))
+                                    recommendAdapter.notifyDataSetChanged()
+                                }
+                            }
+                        }, { fail -> Log.i("urls_failed", fail.message) })
     }
 
     /*fun additem1(){

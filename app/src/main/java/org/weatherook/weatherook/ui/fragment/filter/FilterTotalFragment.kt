@@ -12,6 +12,7 @@ import android.widget.NumberPicker
 import android.widget.SeekBar
 import android.widget.TextView
 import kotlinx.android.synthetic.main.filter_total.*
+import kotlinx.android.synthetic.main.filter_total.view.*
 import org.weatherook.weatherook.R
 import org.weatherook.weatherook.singleton.FilterDriver
 
@@ -93,6 +94,7 @@ class FilterTotalFragment : Fragment(), View.OnClickListener, SeekBar.OnSeekBarC
     override fun onStart() {
         super.onStart()
 
+        total_women.isSelected=true
         var data = ArrayList<String>()
         for(i in 0..40){
             data.add(i.toString())

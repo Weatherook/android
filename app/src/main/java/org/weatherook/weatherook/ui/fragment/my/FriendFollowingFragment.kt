@@ -42,11 +42,17 @@ class FriendFollowingFragment : Fragment(), View.OnClickListener {
             token = it
             Log.i("following", token)
         }
+
+        return  v
+    }
+
+    override fun onStart() {
+        super.onStart()
         friendItems = ArrayList()
         friendAdapter = FriendAdapter(friendItems, context!!)
         //friendAdapter.setOnItemClickListener(this)
         Log.i("followingFragmentc", "oncreateview")
-        val friend_following_rv : RecyclerView = v.findViewById(R.id.friend_following_recycle)
+        val friend_following_rv : RecyclerView = view!!.findViewById(R.id.friend_following_recycle)
         friend_following_rv.layoutManager = GridLayoutManager(context,4)
         friend_following_rv.adapter = friendAdapter
         if (token != null) {
@@ -63,14 +69,6 @@ class FriendFollowingFragment : Fragment(), View.OnClickListener {
                             }, { fail -> Log.i("following_failed", fail.message) })
         }
         friendAdapter.notifyDataSetChanged()
-        return  v
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-
-
 
     }
 }

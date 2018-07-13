@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/filter_com_frame"
@@ -7,93 +7,84 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/filter_top"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#ffffff"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/filter_top"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#ffffff"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="나에게 맞는 코디를 찾아보세요"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/filter_top"
+            android:background="#707070" />
+
+
+        <RelativeLayout
+            android:id="@+id/filter_tab"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/filter_top"
+            android:layout_margin="10dp">
+
+            <TextView
+                android:id="@+id/filter_today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="오늘"
+                android:textColor="@color/weatherookTheme"
+                android:textIsSelectable="true"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/filter_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/filter_today"
+                android:text="전체"
+                android:textIsSelectable="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/filter_frame"
+            android:layout_width="match_parent"
+            android:layout_height="390dp"
+            android:layout_below="@+id/filter_tab">
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/filter_ok"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:text="나에게 맞는 코디를 찾아보세요"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_below="@+id/filter_top"
-        android:background="#707070" />
-
-
-    <ScrollView
-        android:id="@+id/filter_frame"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_below="@+id/filter_tab"
-        app:layout_constraintBottom_toTopOf="@+id/filter_ok"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filter_tab">
-
-    </ScrollView>
-
-    <Button
-        android:id="@+id/filter_ok"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="@drawable/rounded_colorbtn"
-        android:text="필터 적용"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/filter_tab"
-        android:layout_width="368dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/filter_top"
-        android:layout_margin="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filter_top">
-
-        <TextView
-            android:id="@+id/filter_today"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:text="오늘"
-            android:textColor="@color/weatherookTheme"
-            android:textIsSelectable="true"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/filter_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/filter_today"
-            android:text="전체"
-            android:textIsSelectable="false"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/rounded_colorbtn"
+            android:text="필터 적용"
+            android:textColor="#ffffff"
+            android:textSize="15dp" />
 
 
     </RelativeLayout>
-
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
