@@ -27,7 +27,7 @@
             android:gravity="center"
             android:textSize="18sp"
             android:text="클로젯" />
-        <Button
+        <TextView
             android:id="@+id/my_setting_btn"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
@@ -85,9 +85,9 @@
                 android:textStyle="bold" />
             <ImageView
                 android:id="@+id/my_profile_edit_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_marginLeft="5dp"
+                android:layout_width="20dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="3dp"
                 android:src="@drawable/editpencil"
                 android:layout_toRightOf="@+id/setting_id_tv" />
 

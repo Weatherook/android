@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -30,14 +31,26 @@ class BellFragment : Fragment(), View.OnClickListener {
     lateinit var likeitems: ArrayList<BellRecyclerViewData>
     lateinit var bellRecyclerviewAdapter: BellRecyclerviewAdapter
 
-
+    var flag = -1
     override fun onClick(p0: View?) {
-       /* val idx : Int = like_recycle.getChildAdapterPosition(p0)
-        val image : String = likeitems[idx].bellprofile
+
+        val idx : Int = like_recycle.getChildAdapterPosition(p0)
+     /*   bellModel.data[i].flag
+        likeitems[idx].fla
+        val image : String = likeitems[idx].bellprofile!!
         val id : String = likeitems[idx].bellname
-        val heartcount : Int = likeitems[idx]....
+        val heartcount : Int = likeitems[idx].bell
         val photo : String = likeitems[idx].bellboardimg
 */
+//0 : 댓글 1: 팔로우
+        if(likeitems[idx].bellflag == 0){
+            Toast.makeText(context, "댓글", Toast.LENGTH_LONG).show()
+
+        }
+        else {
+            Toast.makeText(context, "팔로우", Toast.LENGTH_LONG).show()
+        }
+        //Toast.makeText(context, "ok", Toast.LENGTH_LONG).show()
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = View.inflate(activity, R.layout.fragment_bell, null)
@@ -60,11 +73,7 @@ class BellFragment : Fragment(), View.OnClickListener {
     override fun onStart() {
         super.onStart()
 
-        likeitems = ArrayList()
-        bellRecyclerviewAdapter = BellRecyclerviewAdapter(likeitems, context!!)
-       // bellRecyclerviewAdapter.setOnItemClickListener(this)
-        like_recycle.adapter = bellRecyclerviewAdapter
-        like_recycle.layoutManager = LinearLayoutManager(activity)
+
 
         if (token != null) {
             val call = networkService.getBell(token!!)
@@ -72,12 +81,18 @@ class BellFragment : Fragment(), View.OnClickListener {
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(
                             { bellModel ->
                                 Log.i("urls_success1", bellModel.data.toString())
+                                likeitems = ArrayList()
+                                bellRecyclerviewAdapter = BellRecyclerviewAdapter(likeitems, context!!)
+                                bellRecyclerviewAdapter.setOnItemClickListener(this)
+                                like_recycle.adapter = bellRecyclerviewAdapter
+                                like_recycle.layoutManager = LinearLayoutManager(activity)
                                 for (i in 0..bellModel.data.size - 1) {
+
                                     if (bellModel.data[i].flag == 0) {
                                         var list = bellModel.data[i].dateModify.split(" ")
                                         likeitems.add(BellRecyclerViewData(bellModel.data[i].commentImg,
                                                 bellModel.data[i].commentId, bellModel.data[i].commentStr,
-                                                bellModel.data[i].commentDesc, list[1], bellModel.data[i].boardImg))
+                                                bellModel.data[i].commentDesc, list[1], bellModel.data[i].boardImg,bellModel.data[i].flag))
                                         bellRecyclerviewAdapter.notifyDataSetChanged()
                                     }
                                     if (bellModel.data[i].flag == 1) {
@@ -85,7 +100,7 @@ class BellFragment : Fragment(), View.OnClickListener {
                                         Log.d("sssssssssss",list[1])
                                         likeitems.add(BellRecyclerViewData(bellModel.data[i].followImg.toString(),
                                                 bellModel.data[i].follow, bellModel.data[i].followStr,
-                                                "팔로우 하시겠습니까?", list[1], "R.drawable.follow_state"))
+                                                "팔로우 하시겠습니까?", list[1], "R.drawable.follow_state",bellModel.data[i].flag))
                                         bellRecyclerviewAdapter.notifyDataSetChanged()
                                         Log.i("urls_success3",bellModel.data.toString())
                                     } else

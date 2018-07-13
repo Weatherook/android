@@ -36,6 +36,7 @@ class MySettingActivity : AppCompatActivity(), View.OnClickListener {
     var mysetting_btn : ArrayList<TextView> = ArrayList()
 
     private var image : MultipartBody.Part? = null
+
     val networkService by lazy {
         NetworkService.create()
     }
@@ -43,7 +44,7 @@ class MySettingActivity : AppCompatActivity(), View.OnClickListener {
 
     var token : String ?= null
 
-
+var p : RequestBody?= null
     override fun onClick(p0: View?) {
         when(p0){
             my_setting_com_btn -> {
@@ -96,10 +97,9 @@ class MySettingActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQ_CODE_SELECT_IMAGE) {
-            if (resultCode == Activity.RESULT_OK)
-
-             {
+            if (resultCode == Activity.RESULT_OK) {
                 try {
                     //if(ApplicationController.getInstance().is)
                     this.data = data!!.data
@@ -117,19 +117,22 @@ class MySettingActivity : AppCompatActivity(), View.OnClickListener {
                     val bitmap = BitmapFactory.decodeStream(input, null, options) // InputStream 으로부터 Bitmap 을 만들어 준다.
                     val baos = ByteArrayOutputStream()
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
-                    val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
+                 //   val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
                     val photo = File(this.data.toString()) // 가져온 파일의 이름을 알아내려고 사용합니다
 
+                    Log.d("tag", "==========================" + this.data.toString() + "=========================")
+                    val photoBody = RequestBody.create(MediaType.parse("multipart/form-data"), baos.toByteArray())
                     ///RequestBody photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray());
                     // MultipartBody.Part 실제 파일의 이름을 보내기 위해 사용!!
+                    p = RequestBody.create(MediaType.parse("multipart/form-data"), baos.toByteArray())
 
-                    image = MultipartBody.Part.createFormData("photo", photo.name, photoBody)
+                    //image = MultipartBody.Part.createFormData("photo", photo.name, photoBody)
 
                     //body = MultipartBody.Part.createFormData("image", photo.getName(), profile_pic);
 
                     Glide.with(this)
                             .load(data.data)
-                                                       .into(my_setting_profile_img)
+                            .into(my_setting_profile_img)
 
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -137,8 +140,6 @@ class MySettingActivity : AppCompatActivity(), View.OnClickListener {
 
             }
         }
-
-
     }
     fun changeImage() {
         val intent = Intent(Intent.ACTION_PICK)
@@ -194,11 +195,11 @@ class MySettingActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
         if (token != null) {
-            val call = networkService.putUserSetting(token!!, UserSettingUpdateData( desc, gender,age,"https://s3.ap-northeast-2.amazonaws.com/weatherook/jonghyun.jpeg",height,weight,styleList))
+            val call = networkService.putUserSetting(token!!, UserSettingUpdateData( desc, gender, age, p, height,weight,styleList))
             disposable = call.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(
                             {success->
-                                Log.d("tag","풋 성공========================================================")
+                                Log.i("tag","풋 성공========================================================")
                             }, { fail -> Log.i("TodayFragment", fail.message) })
 
         }

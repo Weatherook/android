@@ -9,5 +9,6 @@ data class BellRecyclerViewData (
         var bellringtxt : String,
         var bellreply : String,
         var belltime : String,
-        var bellboardimg : String
+        var bellboardimg : String,
+        var bellflag : Int
 )

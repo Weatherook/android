@@ -92,7 +92,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="42dp"
                     android:layout_height="wrap_content"
                     android:text="아이디"
                     android:gravity="center_horizontal"
@@ -129,7 +129,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="42dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="글       "
@@ -165,26 +165,27 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="160dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:gravity="center">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="42dp"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:text="나이"
                     android:textSize="15dp" />
 
-                <TextView
-                    android:id="@+id/my_setting_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="남"
-                    android:visibility="invisible"
-                    />
+
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
@@ -196,15 +197,61 @@
                     android:background="@null"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                <TextView
+                    android:layout_width="42dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="성별"
+                    android:textSize="15dp" />
+
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#3c3c3c"
+                    android:layout_margin="10dp"/>
+
+                <EditText
+                    android:id="@+id/my_setting_gender"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    />
+                </LinearLayout>
+
 
             </LinearLayout>
 
-            <View
-                android:layout_width="160dp"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="#aaaaaa" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="160dp"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#aaaaaa" />
+
+                <View
+                    android:layout_width="160dp"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#aaaaaa" />
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -216,27 +263,29 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_weight="1">
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="42dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+
                         android:text="키 "
+                        android:gravity="center_horizontal"
                         android:textSize="14dp" />
+
                     <View
                         android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:background="#3c3c3c"
-                        android:layout_margin="10dp"/>
+                        android:layout_margin="10dp"
+                        android:background="#3c3c3c" />
 
                     <EditText
                         android:id="@+id/my_setting_tall"
-                        android:background="@null"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@null" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -246,9 +295,8 @@
                     android:gravity="center"
                     android:layout_weight="1">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="42dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:text="몸무게"
                         android:textSize="14dp" />
                     <View
@@ -390,7 +438,7 @@
                     android:layout_marginRight="10dp"
                     android:gravity="center"
                     android:textSize="13dp"
-                    android:text="엘레강스"
+                    android:text="심플"
                     android:textColor="@color/gray"
                     android:background="@drawable/graybtn_state"/>
                 <TextView

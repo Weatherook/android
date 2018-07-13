@@ -14,11 +14,12 @@ import org.weatherook.weatherook.viewholder.BellRecyclerViewHolder
  * Created by HYEON on 2018-07-05.
  */
 class BellRecyclerviewAdapter(private var bellrecyclerviewItems : ArrayList<BellRecyclerViewData>, val context : Context) : RecyclerView.Adapter<BellRecyclerViewHolder>() {
-    lateinit var onItemClick : View.OnClickListener
+   lateinit var onItemClick : View.OnClickListener
 
     fun setOnItemClickListener(I:View.OnClickListener) {
         onItemClick = I
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BellRecyclerViewHolder {
         val mainView : View = LayoutInflater.from(parent.context).inflate(R.layout.item_bell, parent, false)
@@ -40,4 +41,5 @@ class BellRecyclerviewAdapter(private var bellrecyclerviewItems : ArrayList<Bell
             GlideApp.with(context).load(bellrecyclerviewItems[position].bellboardimg).into(holder!!.bellBoardImg)
         }
     }
+
 }
