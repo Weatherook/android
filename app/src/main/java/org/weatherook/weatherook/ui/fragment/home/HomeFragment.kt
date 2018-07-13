@@ -1,10 +1,12 @@
 package org.weatherook.weatherook.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.util.Log
@@ -28,6 +30,8 @@ import org.weatherook.weatherook.adapter.viewpager.RecommendPagerAdapter
 import org.weatherook.weatherook.item.LatLongItem
 import org.weatherook.weatherook.item.WeatherDriverItem
 import org.weatherook.weatherook.singleton.LatLongDriver
+import org.weatherook.weatherook.singleton.tokenDriver
+import org.weatherook.weatherook.ui.activity.PopupActivity
 import org.weatherook.weatherook.utils.CustomViewPager
 
 
@@ -36,9 +40,16 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     }
 
+    var token: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = View.inflate(activity, R.layout.fragment_home, null)
+
+        tokenDriver.tokenDriver.subscribe {
+            token = it
+            Log.i("myfrag", token)
+        }
+
         val permissionlistener = object : PermissionListener {
             override fun onPermissionGranted() {
                 //Toast.makeText(activity, "Permission Granted", Toast.LENGTH_SHORT).show()
@@ -84,13 +95,43 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
         rviewPager.adapter = radapter
         rviewPager.setPagingEnabled(false)
-
+       /* if(home_tab.selectedTabPosition==1){
+            if(token==null){
+                val intent1 = Intent(context, PopupActivity::class.java)
+                startActivity(intent1)
+            }
+        }*/
 
         val fviewPager = view!!.findViewById<ViewPager>(R.id.home_following_viewPager)
         val fadapter = FollowingPagerAdapter(childFragmentManager)
 
         fviewPager.adapter = fadapter
         home_tab.setupWithViewPager(fviewPager)
+
+        fviewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+
+
+
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                //
+            }
+
+            override fun onPageSelected(position: Int) {
+                //
+                if (position == 1) {
+                    if(token==null){
+                        val intent1 = Intent(context, PopupActivity::class.java)
+                        startActivity(intent1)
+                        fviewPager.currentItem = 0
+                    }
+
+                }
+            }
+        })
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {

@@ -1,5 +1,6 @@
 package org.weatherook.weatherook.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -18,6 +19,7 @@ import org.weatherook.weatherook.api.network.NetworkService
 import org.weatherook.weatherook.item.CommentItem
 import org.weatherook.weatherook.item.FollowingItem
 import org.weatherook.weatherook.singleton.tokenDriver
+import org.weatherook.weatherook.ui.activity.PopupActivity
 
 
 class FollowingBFragment : Fragment(),View.OnClickListener {
@@ -65,8 +67,7 @@ class FollowingBFragment : Fragment(),View.OnClickListener {
                                 //followingItems.add(FollowingItem(.data[]))
                             }, { fail -> Log.i("urls_failed", fail.message) })
         }
-
-
+        
         return v
     }
 
