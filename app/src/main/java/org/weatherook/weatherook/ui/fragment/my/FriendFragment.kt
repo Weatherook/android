@@ -44,8 +44,11 @@ class FriendFragment : Fragment(), View.OnClickListener {
 
         friendViewPager.adapter = friendAdapter
         view!!.friend_tablayout.setupWithViewPager(friendViewPager)
+    }
 
-
-
+    override fun onPause() {
+        super.onPause()
+        val friendViewPager = view!!.findViewById<ViewPager>(R.id.friend_viewpager)
+        friendViewPager.adapter=null
     }
 }

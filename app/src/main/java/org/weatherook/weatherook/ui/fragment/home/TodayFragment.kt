@@ -36,9 +36,9 @@ class TodayFragment : Fragment(), View.OnClickListener {
     var disposable: Disposable? = null
 
 
-    var weatherStr = arrayOf("맑음", "구름", "구름", "흐림", "비", "비", "눈")
-    var weatherIcon = arrayOf(R.drawable.main_sun, R.drawable.main_cloud_sun_2, R.drawable.main_cloud_sun_2, R.drawable.main_cloud_2, R.drawable.main_cloud_2, R.drawable.main_rainy_big, R.drawable.main_snow_2)
-    var weatherimg = arrayOf(R.drawable.main_sun2, R.drawable.main_cloud_sun, R.drawable.main_cloud_sun, R.drawable.main_cloud, R.drawable.main_rainy, R.drawable.main_rainy, R.drawable.main_snow)
+    var weatherStr = arrayOf("맑음", "맑음", "구름", "흐림", "비", "비", "눈")
+    var weatherIcon = arrayOf(R.drawable.main_sun, R.drawable.main_sun, R.drawable.main_cloud_sun_2, R.drawable.main_cloud_2, R.drawable.main_cloud_2, R.drawable.main_rainy_big, R.drawable.main_snow_2)
+    var weatherimg = arrayOf(R.drawable.main_sun2, R.drawable.main_sun2, R.drawable.main_cloud_sun, R.drawable.main_cloud, R.drawable.main_rainy, R.drawable.main_rainy, R.drawable.main_snow)
     private var isWeatherButtons: Boolean = false
     override fun onClick(v: View) {
         if (!isWeatherButtons) {
@@ -57,8 +57,8 @@ class TodayFragment : Fragment(), View.OnClickListener {
 
     lateinit var weatherItems: ArrayList<WeatherItem>
     lateinit var weatherAdapter: WeatherAdapter
-    private var x: Double = 0.0
-    private var y: Double = 0.0
+    private var x: Double = 37.0
+    private var y: Double = 126.0
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = View.inflate(activity!!, R.layout.fragment_weather_today, null)
         view.home_weather_location
@@ -94,7 +94,7 @@ class TodayFragment : Fragment(), View.OnClickListener {
 
 
 
-        LatLongDriver.LatLongDriver.subscribe {
+        WeatherDriver.weatherDriver.subscribe {
 
             x= it.x
             y = it.y

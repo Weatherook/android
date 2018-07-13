@@ -34,10 +34,14 @@ class RecommendAdapter(var recommendItems : ArrayList<RecommendItem>, val contex
     override fun getItemCount(): Int = recommendItems.size
 
     override fun onBindViewHolder(holder: RecommendViewHolder, position: Int) {
-        GlideApp.with(context).load(recommendItems[position].cody).override(1280, 960).into(holder.recommendCody)
-        holder.recommendCody.setOnClickListener {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(recommendItems[position].url))
-            context.startActivity(browserIntent)
+        try {
+            GlideApp.with(context).load(recommendItems[position].cody).override(1280, 960).into(holder.recommendCody)
+            holder.recommendCody.setOnClickListener {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(recommendItems[position].url))
+                context.startActivity(browserIntent)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         val intent :Intent = Intent(context, SigninActivity::class.java)
         //intent.putExtra("url", recommendItems[position].cody)

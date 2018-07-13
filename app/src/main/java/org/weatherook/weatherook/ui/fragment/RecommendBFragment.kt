@@ -70,13 +70,14 @@ class RecommendBFragment : Fragment(), View.OnClickListener {
 
         WeatherDriver.weatherDriver.subscribe { it ->
             try {
-                x=it.x
-                y=it.y
+                x = it.x
+                y = it.y
 
                 val call = networkService.postRecommend(token, it.x.toFloat(), it.y.toFloat(), 3)
                 disposable = call.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread()).subscribe(
                                 { success ->
+                                    recommendItems.clear()
                                     if (recommendItems.size == 0) {
                                         Log.i("urls_success1", success.data.size.toString())
                                         var num: Int = 0
@@ -87,7 +88,7 @@ class RecommendBFragment : Fragment(), View.OnClickListener {
                                         }
 
                                         for (i in 0..num - 1) {
-                                            recommendItems.add(RecommendItem(success.data[i].commendImg,success.data[i].commendRef.toString()))
+                                            recommendItems.add(RecommendItem(success.data[i].commendImg, success.data[i].commendRef.toString()))
                                             recommendAdapter.notifyDataSetChanged()
                                         }
                                     }
@@ -104,8 +105,9 @@ class RecommendBFragment : Fragment(), View.OnClickListener {
 
         home_refresh_btn.setOnClickListener(this)
     }
-    var x=0.toDouble()
-    var y=0.toDouble()
+
+    var x = 37.toDouble()
+    var y = 126.toDouble()
 
     override fun onResume() {
         super.onResume()
@@ -115,22 +117,22 @@ class RecommendBFragment : Fragment(), View.OnClickListener {
         disposable = call.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                         { success ->
-                            if (recommendItems.size == 0) {
-                                Log.i("urls_success1", success.data.size.toString())
-                                var num: Int = 0
-                                if (success.data.size > 4) {
-                                    num = 4
-                                } else {
-                                    num = success.data.size
-                                }
 
-                                if(recommendItems.size<4) {
-                                    for(i in 0..num-1){
-                                        recommendItems.add(RecommendItem(success.data[i].commendImg,success.data[i].commendRef.toString()))
-                                        recommendAdapter.notifyDataSetChanged()
-                                    }
+                            Log.i("urls_success1", success.data.size.toString())
+                            var num: Int = 0
+                            if (success.data.size > 4) {
+                                num = 4
+                            } else {
+                                num = success.data.size
+                            }
+
+                            if (recommendItems.size < 4) {
+                                for (i in 0..num - 1) {
+                                    recommendItems.add(RecommendItem(success.data[i].commendImg, success.data[i].commendRef.toString()))
+                                    recommendAdapter.notifyDataSetChanged()
                                 }
                             }
+
                         }, { fail -> Log.i("urls_failed", fail.message) })
     }
 

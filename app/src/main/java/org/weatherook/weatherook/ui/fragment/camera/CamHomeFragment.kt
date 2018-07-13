@@ -105,8 +105,7 @@ class CamHomeFragment : Fragment() , View.OnClickListener{
                 val iv_sticker = StickerImageView(context!!)
                 //iv_sticker.setImageDrawable(i.drawable)
                 stickerList.add(iv_sticker)
-                iv_sticker.iv_main!!.setOnClickListener{iv_sticker.shouldShowButtons(true)
-                    iv_sticker.iv_delete.setOnClickListener { stickerList.remove(iv_sticker) }}
+                iv_sticker.iv_main!!.setOnClickListener{iv_sticker.shouldShowButtons(true) }
                 iv_sticker.setImageResource(stickerIDList.get(stickerTabList.indexOf(i)))
                 canvas.addView(iv_sticker)
                 view.camhome_sticker_container.visibility=View.INVISIBLE

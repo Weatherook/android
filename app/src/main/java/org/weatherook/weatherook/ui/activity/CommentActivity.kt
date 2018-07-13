@@ -92,8 +92,9 @@ class CommentActivity : AppCompatActivity(), View.OnClickListener {
                             Glide.with(this).load(GetCommentModel.userImg).into(reply_write_profile)
                             commenttotalItems.clear()
                             for (i in 0..GetCommentModel.data.size-1){
+                                var list = GetCommentModel.data[i].commentDate.split(" ")
                                 GetCommentModel.data[i].let {
-                                    commenttotalItems.add(CommentTotalItem(it.userImg,it.commentDate,it.commentId,it.commentDesc))
+                                    commenttotalItems.add(CommentTotalItem(it.userImg,list[2]+":"+list[3]+" 게시",it.commentId,it.commentDesc))
                                     commenttotalAdapter.notifyDataSetChanged()
                                 }
                             }

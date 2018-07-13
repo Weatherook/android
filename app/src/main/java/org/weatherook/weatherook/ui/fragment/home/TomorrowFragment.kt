@@ -25,11 +25,11 @@ class TomorrowFragment : Fragment() {
     }
     var disposable: Disposable? = null
 
-    var x: Double = 0.0
-    var y: Double = 0.0
+    var x: Double = 37.0
+    var y: Double = 126.0
 
-    var weatherStr = arrayOf("맑음", "구름", "구름", "흐림", "비", "비", "눈")
-    var weatherIcon = arrayOf(R.drawable.main_sun, R.drawable.main_cloud_sun_2, R.drawable.main_cloud_sun_2, R.drawable.main_cloud_2, R.drawable.main_cloud_2, R.drawable.main_rainy_big, R.drawable.main_snow_2)
+    var weatherStr = arrayOf("맑음", "맑음", "구름", "흐림", "비", "비", "눈")
+    var weatherIcon = arrayOf(R.drawable.main_sun, R.drawable.main_sun, R.drawable.main_cloud_sun_2, R.drawable.main_cloud_2, R.drawable.main_cloud_2, R.drawable.main_rainy_big, R.drawable.main_snow_2)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = View.inflate(activity, R.layout.fragment_weather_tomorrow, null)
 
