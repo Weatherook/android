@@ -113,20 +113,11 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
                 disposable = call.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread()).subscribe(
                                 { success ->
-                                    if (recommendItems.size == 0) {
-                                        Log.i("urls_success1", success.data.size.toString())
-                                        var num: Int = 0
-                                        if (success.data.size > 4) {
-                                            num = 4
-                                        } else {
-                                            num = success.data.size
-                                        }
-
-                                        for (i in 0..num - 1) {
+                                        for (i in 0..4-recommendItems.size-1) {
                                             recommendItems.add(RecommendItem(success.data[i].commendImg, success.data[i].commendRef.toString()))
                                             recommendAdapter.notifyDataSetChanged()
                                         }
-                                    }
+
                                 }, { fail -> Log.i("urls_failed", fail.message) })
 
             } catch (e: Exception) {
@@ -159,6 +150,16 @@ class RecommendAFragment : Fragment(), View.OnClickListener {
 
     fun clear() {
         recommendItems.clear()
+        val call = networkService.postRecommend(token, x.toFloat(), y.toFloat(), 2)
+        disposable = call.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                        { success ->
+                            for (i in 0..4-recommendItems.size-1) {
+                                recommendItems.add(RecommendItem(success.data[i].commendImg, success.data[i].commendRef.toString()))
+                                recommendAdapter.notifyDataSetChanged()
+                            }
+
+                        }, { fail -> Log.i("urls_failed", fail.message) })
     }
 
     override fun onResume() {

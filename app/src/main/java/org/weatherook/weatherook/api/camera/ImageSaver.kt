@@ -10,7 +10,7 @@ import java.io.IOException
 import java.nio.ByteBuffer
 import android.net.Uri
 import android.content.Intent
-
+import org.weatherook.weatherook.ui.activity.WriteActivity
 
 
 /**
@@ -42,10 +42,10 @@ internal class ImageSaver(
             Log.e(TAG, e.toString())
         } finally {
             image.close()
-            val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
+            /*val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
             val uri = Uri.fromFile(file)
-            mediaScanIntent.data = uri
-            context.sendBroadcast(mediaScanIntent)
+            mediaScanIntent.data = uri'
+            context.sendBroadcast(mediaScanIntent)*/
             output?.let {
                 try {
                     it.close()
@@ -53,6 +53,17 @@ internal class ImageSaver(
                     Log.e(TAG, e.toString())
                 }
             }
+            try {
+                val scanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                val contentUri = Uri.fromFile(file);
+                scanIntent.setData(contentUri);
+                context.sendBroadcast(scanIntent);
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            /*val activity = Intent(context, WriteActivity::class.java)
+            activity.putExtra("imageuri",uri)
+            context.startActivity(activity)*/
         }
     }
 

@@ -31,7 +31,7 @@ class FilterCompleteFragment : Fragment(), View.OnClickListener {
         when (p0) {
             refilter_txt -> {
                 fragmentManager!!.beginTransaction().remove(this).commit()
-                fragmentManager!!.popBackStack()
+                //fragmentManager!!.popBackStack()
             }
         }
     }

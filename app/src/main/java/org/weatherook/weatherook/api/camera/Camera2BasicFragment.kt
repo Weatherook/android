@@ -2,7 +2,9 @@ package org.weatherook.weatherook.api.camera
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.graphics.ImageFormat
@@ -20,9 +22,12 @@ import android.hardware.camera2.CaptureRequest
 import android.hardware.camera2.CaptureResult
 import android.hardware.camera2.TotalCaptureResult
 import android.media.ImageReader
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
 import android.os.HandlerThread
+import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -34,10 +39,13 @@ import android.view.Surface
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import org.weatherook.weatherook.R
 import java.io.File
-import java.util.Arrays
-import java.util.Collections
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.Semaphore
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
@@ -139,6 +147,14 @@ class Camera2BasicFragment : Fragment(), View.OnClickListener,
      * still image is ready to be saved.
      */
     private val onImageAvailableListener = ImageReader.OnImageAvailableListener {
+        var value = ContentValues()
+        value.put(MediaStore.Images.Media.TITLE, "ImageName")
+        value.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+        value.put(MediaStore.Images.Media.ORIENTATION, ORIENTATIONS.get(270))
+        value.put(MediaStore.Images.Media.CONTENT_TYPE, "image/jpeg")
+        value.put("_data", file.absolutePath)
+        val cr = activity!!.contentResolver
+        cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, value)
         backgroundHandler?.post(ImageSaver(context!!, it.acquireNextImage(), file))
     }
 
@@ -248,7 +264,7 @@ class Camera2BasicFragment : Fragment(), View.OnClickListener,
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        file = File(activity!!.getExternalFilesDir(null), PIC_FILE_NAME)
+        file = File(activity!!.filesDir, SimpleDateFormat("yyyy-MM-dd HHmmss").format(Date()))
     }
 
     override fun onResume() {

@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import com.gun0912.tedpermission.PermissionListener
+import com.gun0912.tedpermission.TedPermission
 import kotlinx.android.synthetic.main.activity_main.*
 import org.weatherook.weatherook.R
 import org.weatherook.weatherook.singleton.tokenDriver
@@ -113,6 +116,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val fragmentManager : FragmentManager = supportFragmentManager
         addFragment(HomeFragment())
         main_btn_home.isSelected = true
+        val permissionlistener = object : PermissionListener {
+            override fun onPermissionGranted() {
+                //Toast.makeText(activity, "Permission Granted", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onPermissionDenied(deniedPermissions: java.util.ArrayList<String>) {
+                Toast.makeText(this@MainActivity, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this,"권한이 거절되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        TedPermission.with(this)
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("권한을 주지 않으면 사용할 수 없습니다.")
+                .setPermissions(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                .setPermissions(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .check()
       //  addFragment(HomeFragment())
         /*
         val fragmentManager: FragmentManager = supportFragmentManager

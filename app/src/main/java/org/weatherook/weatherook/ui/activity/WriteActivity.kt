@@ -59,7 +59,7 @@ class WriteActivity : AppCompatActivity(),View.OnClickListener {
 
         my_setting_btn.setOnClickListener {
             val options = BitmapFactory.Options()
-            options.inSampleSize = 4
+            //options.inSampleSize = 4
             bitmap = BitmapFactory.decodeFile(intent.getStringExtra("url"), options)
             if(bitmap==null){
                 Log.i("bitmap","null")
@@ -123,11 +123,14 @@ class WriteActivity : AppCompatActivity(),View.OnClickListener {
         }*/
 
         val options = BitmapFactory.Options()
-        options.inSampleSize = 4
-        val bitmap = BitmapFactory.decodeFile(intent.getStringExtra("url"), options)
+        if(intent.getStringExtra("imageuri")==null){
+            val bitmap = BitmapFactory.decodeFile(intent.getStringExtra("url"), options)
+        }else{
+            val bitmap = BitmapFactory.decodeFile(intent.getStringExtra("imageuri"), options)
+        }
         //val bitmap = BitmapFactory.decodeStream(input, null, options) // InputStream 으로부터 Bitmap 을 만들어 준다.
         val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos)
+        bitmap!!.compress(Bitmap.CompressFormat.JPEG, 20, baos)
         val photoBody = RequestBody.create(MediaType.parse("image/jpg"), baos.toByteArray())
         val photo = File(intent.getStringExtra("url"))
         val image = MultipartBody.Part.createFormData("board_img", photo.name, photoBody)
